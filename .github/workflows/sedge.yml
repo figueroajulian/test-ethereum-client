@@ -21,27 +21,28 @@ jobs:
       - name: Download Sedge sources
         run: |
           echo "Downloading sedge sources..."
-          git clone https://github.com/NethermindEth/sedge.git src --branch main --single-branch
+          git clone https://github.com/NethermindEth/sedge.git sedge --branch main --single-branch
           echo "Sources downloaded."
 
       - name: Build Sedge
         run: |
-          cd src
+          cd sedge
           echo "Building sedge..."
           make compile
           ./sedge --help
     
       - name: Run Sedge tool
         run: |
+          cd sedge
           echo 'Running sedge...
-          ./sedge deps install >> $HOME/sedge.logs
-          ./sedge generate --logging none -p $HOME/full-node \
+          sedge deps install >> $HOME/sedge.logs
+          sedge generate --logging none -p $HOME/full-node \
             --map-all --no-mev-boost --no-validator --network chiado \
             -c lighthouse:sigp/lighthouse:latest -e nethermind:nethermindeth/nethermind:master \
             --el-extra-flag Sync.NonValidatorNode=true --el-extra-flag Sync.DownloadBodiesInFastSync=false \
             --el-extra-flag Sync.DownloadReceiptsInFastSync=false \
             --cl-extra-flag checkpoint-sync-url=http://139.144.26.89:4000/ >> $HOME/sedge.logs
-          ./sedge run -p . >> $HOME/sedge.logs
+          sedge run -p . >> $HOME/sedge.logs
 
       - name: Verify client synchronization
         run: |
