@@ -23,12 +23,16 @@ jobs:
           echo "Downloading sedge sources..."
           git clone https://github.com/NethermindEth/sedge.git src --branch main --single-branch
           echo "Sources downloaded."
+
+      - name: Build Sedge
+        run: |
           cd src
           echo "Building sedge..."
           make compile
-
+    
       - name: Run Sedge tool
         run: |
+          cd src
           echo 'Running sedge...'
           ./sedge deps install >> $HOME/sedge.logs
           ./sedge generate --logging none -p $HOME/full-node \
