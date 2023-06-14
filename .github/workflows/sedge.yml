@@ -21,15 +21,9 @@ jobs:
       - name: Download Sedge sources
         run: |
           echo "Downloading sedge sources..."
-          git clone https://github.com/NethermindEth/sedge.git sedge --branch main --single-branch
+          curl -L https://github.com/NethermindEth/sedge/releases/download/v1.2.0/sedge-v1.2.0-linux-amd64 --output sedge
+          ./sedge --help
           echo "Sources downloaded."
-
-      - name: Build Sedge
-        run: |
-          cd sedge
-          echo "Building sedge..."
-          make compile
-          sedge --help
     
       - name: Run Sedge tool
         run: |
