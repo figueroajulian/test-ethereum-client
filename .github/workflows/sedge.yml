@@ -25,6 +25,7 @@ jobs:
           chmod +x sedge
           ./sedge --help
           echo "Sources downloaded."
+          ls
     
       - name: Run Sedge tool
         run: |
@@ -35,6 +36,8 @@ jobs:
           --el-extra-flag Sync.NonValidatorNode=true --el-extra-flag Sync.DownloadBodiesInFastSync=false \
           --el-extra-flag Sync.DownloadReceiptsInFastSync=false \
           --cl-extra-flag checkpoint-sync-url=http://139.144.26.89:4000/
+          cp /home/runner/full-node/docker-compose.yml ./
+          ls
           ./sedge run -p . >> $HOME/sedge.logs
 
       - name: Verify client synchronization
