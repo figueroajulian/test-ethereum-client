@@ -28,7 +28,8 @@ jobs:
     
       - name: Run Sedge tool
         run: |
-          echo 'Running sedge...
+          cd sedge
+          echo 'Running sedge...'
           ./sedge deps install >> $HOME/sedge.logs
           ./sedge generate --logging none -p $HOME/full-node \
             --map-all --no-mev-boost --no-validator --network chiado \
