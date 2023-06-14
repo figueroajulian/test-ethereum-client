@@ -22,6 +22,7 @@ jobs:
         run: |
           echo "Downloading sedge sources..."
           curl -L https://github.com/NethermindEth/sedge/releases/download/v1.2.0/sedge-v1.2.0-linux-amd64 --output sedge
+          chmod +x sedge
           ./sedge --help
           echo "Sources downloaded."
     
