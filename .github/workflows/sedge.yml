@@ -28,7 +28,6 @@ jobs:
     
       - name: Run Sedge tool
         run: |
-          cd sedge
           echo 'Running sedge...'
           ./sedge deps install >> $HOME/sedge.logs
           ./sedge generate --logging none -p $HOME/full-node \
