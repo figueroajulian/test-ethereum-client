@@ -25,19 +25,17 @@ jobs:
           chmod +x sedge
           ./sedge --help
           echo "Sources downloaded."
-          ls
-    
+
       - name: Run Sedge tool
         run: |
           echo 'Running sedge...'
           ./sedge deps install >> $HOME/sedge.logs
-          ./sedge generate full-node --logging none -p $HOME/full-node --no-mev-boost --no-validator --network chiado \
-          -c lighthouse:sigp/lighthouse:latest -e nethermind:nethermindeth/nethermind:master \
-          --el-extra-flag Sync.NonValidatorNode=true --el-extra-flag Sync.DownloadBodiesInFastSync=false \
-          --el-extra-flag Sync.DownloadReceiptsInFastSync=false \
-          --cl-extra-flag checkpoint-sync-url=http://139.144.26.89:4000/
-          cp /home/runner/full-node/docker-compose.yml ./
-          ls
+          ./sedge generate --logging none -p $HOME/full-node \
+            --no-mev-boost --no-validator --network chiado \
+            --client lighthouse:sigp/lighthouse:latest \
+            --eth1 nethermind:nethermindeth/nethermind:master \
+            --extra-flags "--Sync.NonValidatorNode=true --Sync.DownloadBodiesInFastSync=false --Sync.DownloadReceiptsInFastSync=false --checkpoint-sync-url=http://139.144.26.89:4000/"
+          cp $HOME/full-node/docker-compose.yml ./
           ./sedge run -p . >> $HOME/sedge.logs
 
       - name: Verify client synchronization
