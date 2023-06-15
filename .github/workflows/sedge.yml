@@ -10,38 +10,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Install Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
-          go-version: 1.20.5
+          go-version: 1.19
 
       - name: Download Sedge sources
         run: |
           echo "Downloading sedge sources..."
-          git clone https://github.com/NethermindEth/sedge.git src --branch main --single-branch
+          git clone https://github.com/NethermindEth/sedge.git
           echo "Sources downloaded."
 
       - name: Build Sedge
         run: |
-          cd src
+          cd sedge
           echo "Building sedge..."
           make compile
-    
+          echo "Building complete."
+
       - name: Run Sedge tool
         run: |
-          cd src
+          cd sedge
           echo 'Running sedge...'
-          ./sedge deps install >> $HOME/sedge.logs
-          ./sedge generate --logging none -p $HOME/full-node \
-            --map-all --no-mev-boost --no-validator --network chiado \
-            -c lighthouse:sigp/lighthouse:latest -e nethermind:nethermindeth/nethermind:master \
-            --el-extra-flag Sync.NonValidatorNode=true --el-extra-flag Sync.DownloadBodiesInFastSync=false \
-            --el-extra-flag Sync.DownloadReceiptsInFastSync=false \
-            --cl-extra-flag checkpoint-sync-url=http://139.144.26.89:4000/ >> $HOME/sedge.logs
-          ./sedge run -p . >> $HOME/sedge.logs
+          sedge deps install >> $HOME/sedge.logs
+          sedge --logging none -p $HOME/full-node \
+          --map-all --no-mev-boost --no-validator --network chiado \
+          -c lighthouse:sigp/lighthouse:latest -e nethermind:nethermindeth/nethermind:master \
+          --el-extra-flag Sync.NonValidatorNode=true --el-extra-flag Sync.DownloadBodiesInFastSync=false \
+          --el-extra-flag Sync.DownloadReceiptsInFastSync=false \
+          --cl-extra-flag checkpoint-sync-url=http://139.144.26.89:4000/ >> $HOME/sedge.logs
+          sedge run -p . >> $HOME/sedge.logs
 
       - name: Verify client synchronization
         run: |
