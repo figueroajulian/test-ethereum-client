@@ -32,7 +32,6 @@ jobs:
           ./sedge generate full-node --logging none --no-mev-boost --no-validator --network chiado \
           -c lighthouse -e nethermind \
           --checkpoint-sync-url=http://139.144.26.89:4000/ 
-          cp $HOME/full-node/docker-compose.yml ./
           ./sedge run
 
       - name: Verify client synchronization
