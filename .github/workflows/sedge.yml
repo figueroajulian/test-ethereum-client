@@ -29,7 +29,7 @@ jobs:
       - name: Run Sedge tool
         run: |
           echo 'Running sedge...'
-          sedge generate full-node --logging none -p $HOME/full-node --no-mev-boost --no-validator --network chiado \
+          ./sedge generate full-node --logging none -p $HOME/full-node --no-mev-boost --no-validator --network chiado \
           -c lighthouse:sigp/lighthouse:latest -e nethermind:nethermindeth/nethermind:master \
           --el-extra-flag Sync.NonValidatorNode=true --el-extra-flag Sync.DownloadBodiesInFastSync=false \
           --el-extra-flag Sync.DownloadReceiptsInFastSync=false \
