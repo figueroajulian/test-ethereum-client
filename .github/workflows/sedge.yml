@@ -36,7 +36,7 @@ jobs:
 
       - name: Verify client synchronization
         run: |
-          JSON_RPC_URL="localhost:8008"
+          JSON_RPC_URL="http://139.144.26.89:4000"
           response=$(curl --data '{"method":"eth_syncing","params":[],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST $JSON_RPC_URL)
           if echo "$response" | grep -q '"result":false'; then
             echo "Syncing completed"
