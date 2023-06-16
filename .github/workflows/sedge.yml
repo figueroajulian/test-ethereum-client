@@ -43,8 +43,10 @@ jobs:
           else
             echo "Syncing in progress"
           fi
-      
-      - name: Verify sedge logs
+          
+      - name: Run tests
         run: |
-          ./sedge logs
+          JSON_RPC_URL="http://139.144.26.89:4000"
+          response=$(curl --data '{"method":"eth_blockNumber","params":[],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST $JSON_RPC_URL)
+          echo $response
 
