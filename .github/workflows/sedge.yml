@@ -47,7 +47,7 @@ jobs:
       - name: Run tests
         run: |
           JSON_RPC_URL="http://139.144.26.89:8545"
-          response=$(curl --data '{"method":"eth_getBlockByNumber","params":[blockParameter, returnFullTransactionObjects],"id":4496389,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST $JSON_RPC_URL)
+          response=$(curl --data '{"method":"eth_getBlockByNumber","params":[blockParameter, returnFullTransactionObjects],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST $JSON_RPC_URL)
           echo "$response"
 
       
