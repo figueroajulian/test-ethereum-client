@@ -1,4 +1,4 @@
-name: Sedge
+name: JSON RPC Tests.
 
 on:
   push:
@@ -54,7 +54,7 @@ jobs:
 
       - name: Run tests
         run: |
-            pytest
+          python3 -m pytest
 
       # - name: Run tests
       #   run: |
