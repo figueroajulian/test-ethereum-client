@@ -8,4 +8,4 @@ ENV PYTHONPATH=/app \
 
 # Install requirements.txt
 COPY ./requirements.txt .
-RUN pip3 -q install -r requirements.txt
+RUN pip -q install -r requirements.txt
