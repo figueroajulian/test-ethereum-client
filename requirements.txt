@@ -3,3 +3,5 @@ assertpy==1.1
 requests==2.27.1
 locust==2.10.1
 python-dotenv==0.15.0
+pytest-reporter-html1==0.8.2
+pytest-retry==1.2.1
