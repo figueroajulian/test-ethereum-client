@@ -24,7 +24,7 @@ pip -q install -r requirements.txt
 
 ### To run the integration tests, execute the following command:
 ```
-python3 -m pytest --template=html1/index.html --report=./reports/integration_tests_report.html
+pytest --template=html1/index.html --report=./reports/integration_tests_report.html
 ```
 ### To run the performance tests:
 
