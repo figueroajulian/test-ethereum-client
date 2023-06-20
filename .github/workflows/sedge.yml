@@ -44,17 +44,23 @@ jobs:
             echo "Syncing in progress"
           fi
 
-      # - name: Checkout
-      #   uses: actions/checkout@v3
+    - name: Checkout
+        uses: actions/checkout@v3
 
-      # - name: Set up Python
-      # - uses: actions/setup-python@v4
-      #   with:
-      #     python-version: '3.10'
+      - name: Set up Python
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
-      # - name: Install dependencies
-      #   run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-      # - name: Run tests
-      #   run: |
-      #     pytest
+      - name: Run tests
+        run: |
+          pytest
+
+    # - name: Run tests
+    #   run: |
+    #     JSON_RPC_URL="http://139.144.26.89:8545"
+    #     response=$(curl --data '{"method":"eth_getBlockByNumber","params":[4491735, true],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST $JSON_RPC_URL)
+    #     echo "$response"

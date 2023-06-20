@@ -1,9 +1,11 @@
 import requests
 
 from utils.env_variables import URL
+from functools import lru_cache
 
 class BlockNumberAsClient():
 
+    @lru_cache(maxsize=None)
     def get_chain_head(self):
         payload = {"method":"eth_blockNumber"
                 ,"params":[]}
@@ -12,7 +14,7 @@ class BlockNumberAsClient():
         return response
 
     def get_eth_blockByNumber(self,block):
-        block = block.json()
+        blockResult = block.json()
         hex_number = block['result']
         blockNumber = int(hex_number, 16)
         payload = {
