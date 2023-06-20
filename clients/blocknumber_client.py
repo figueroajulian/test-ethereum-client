@@ -17,7 +17,7 @@ class BlockNumberAsClient():
 
         return response
 
-    def get_eth_blockByNumber(self,block):
+    def get_eth_blockByNumber(self, block):
         block_response = block.json()
         hex_number = block_response['result']
         block_number = int(hex_number, 16)
