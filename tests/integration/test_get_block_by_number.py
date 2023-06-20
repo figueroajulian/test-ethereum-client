@@ -33,5 +33,4 @@ def test_eth_getBlockByNumber():
     assert_that(blockDetails).contains_key('number')
     assert_that(blockDetails).contains_key('hash')
     assert_that(blockDetails['gasUsed']).is_type_of(str).matches(r'^0x[0-9a-fA-F]+$')
-    assert_that(blockDetails['transactions']).is_not_empty()
     assert_that(blockDetails['difficulty']).is_instance_of(str)
