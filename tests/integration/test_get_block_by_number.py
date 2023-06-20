@@ -2,26 +2,36 @@ import requests
 
 from assertpy import assert_that
 from clients.blocknumber_client import BlockNumberAsClient
+from utils.env_variables import URL
 
-# - Testing block chain head
 def test_eth_blockNumber():
+    # Get the block number
     eth_blockNumber = BlockNumberAsClient().get_chain_head()
 
+    # Verify that the request was successful
     assert_that(eth_blockNumber.status_code).is_equal_to(requests.codes.ok)
 
-    result = eth_blockNumber.json()
-    assert_that(result).contains('result')
-    assert isinstance(result['result'], str)
+    # Verify the response content
+    block = eth_blockNumber.json()
+    assert_that(block).described_as("Invalid response").contains_entry({"jsonrpc": "2.0"})
+    assert_that(block['result']).is_not_none()
 
-# - Testing block response details
+
 def test_eth_getBlockByNumber():
-    block = BlockNumberAsClient().get_chain_head()
-    eth_blockByNumber = BlockNumberAsClient().get_eth_blockByNumber(block)
+    # Get the first block
+    firstBlock = BlockNumberAsClient().get_chain_head()
 
+    # Get the block details by block number
+    eth_blockByNumber = BlockNumberAsClient().get_eth_blockByNumber(firstBlock)
+
+    # Verify that the request was successful
     assert_that(eth_blockByNumber.status_code).is_equal_to(requests.codes.ok)
 
-    result = eth_blockByNumber.json()
-    assert_that(result['result']).is_not_empty()
-    assert_that(result['hash']).is_not_empty()
-    assert_that(result['number']).is_not_empty()
-    assert_that(result['author']).is_not_empty()
+    # Verify the response content
+    blockDetails = eth_blockByNumber.json()['result']
+    assert_that(blockDetails).contains_key('hash')
+    assert_that(blockDetails).contains_key('number')
+    assert_that(blockDetails).contains_key('hash')
+    assert_that(blockDetails['gasUsed']).is_type_of(str).matches(r'^0x[0-9a-fA-F]+$')
+    assert_that(blockDetails['transactions']).is_not_empty()
+    assert_that(blockDetails['difficulty']).is_instance_of(str)
