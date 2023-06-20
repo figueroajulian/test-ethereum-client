@@ -54,7 +54,10 @@ jobs:
 
       - name: Run tests
         run: |
+            echo $PWD
+            cd ./test-ethereum-client
             pytest
+
 
       # - name: Run tests
       #   run: |
