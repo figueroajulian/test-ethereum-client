@@ -6,9 +6,9 @@
   </picture>
 </p>
 
-# Automation testing for Nethermind Eth client.
+# Testing nethermind eth client.
 
-This projects serves as a demonstration of automation testing for the performance and the api of Sedge services using Nethermind as Ethereum client.
+This project serves as a comprehensive demonstration of automated testing for both the performance and API of Sedge services, leveraging Nethermind as the Ethereum client.
 
 ## Requirements to run the tests.
 To run this project, one need:
